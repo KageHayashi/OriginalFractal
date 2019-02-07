@@ -1,28 +1,23 @@
+
 void setup() {
-  size(1080,720);
+  size(500,500);
 }
 
 void draw() {
   background(0);
-  fractal(20,700,500);
+  noFill();
+  stroke(255);
+  dia(width/2,height/2,300);
 }
 
-void fractal(float x, float y, float z) {
-  if (z <= 20) {
-    stroke(255);
-    //noFill();
-    beginShape();
-  for(int i = 0; i < 6; i++) {
-    float angle = i * 2 * PI / 6;
-    vertex(x + z*cos(angle),y + z*sin(angle));
-  }
-  endShape(CLOSE);
-  }
-  else {
-    fractal(x,y,z/2);
-    fractal(x+z/1.25,y-z/2.2,z/2);
-    //fractal(x+z/1.25,y+z/2.2,z/2);
-    //fractal(x-z/1.25,y+z/2.2,z/2);
+void dia(float x, float y, float z) {
+  ellipse(x,y,z,z);
+  if (z > 10) {
+    z *= 0.5;
+    dia(x,y,z);
+    dia(x-z,y,z/2);
+    dia(x+z,y,z/2);
+    dia(x,y+z,z/2);
+    dia(x,y-z,z/2);
   }
 }
-  
